@@ -46,7 +46,6 @@ fun RegistrationScreen(
     var emailTextState by rememberSaveable { mutableStateOf("") }
     var passwordTextState by rememberSaveable { mutableStateOf("") }
     var repeatPasswordTextState by rememberSaveable { mutableStateOf("") }
-
     var isVisiblePassword by rememberSaveable { mutableStateOf(false) }
     var isVisibleRepeatPassword by rememberSaveable { mutableStateOf(false) }
 

@@ -3,6 +3,7 @@ package com.example.marketplace.util
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.marketplace.domain.IsEmailCorrectUseCase
+import com.example.marketplace.ui.screen.auth.AuthViewModel
 import com.example.marketplace.ui.screen.registration.RegistrationViewModel
 
 @Suppress("UNCHECKED_CAST")
@@ -16,6 +17,13 @@ class ViewModelFactory(
                     isEmailCorrectUseCase = isEmailCorrectUseCase
                 ) as T
             }
+
+            modelClass.isAssignableFrom(AuthViewModel::class.java) -> {
+                AuthViewModel(
+                    isEmailCorrectUseCase = isEmailCorrectUseCase
+                ) as T
+            }
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
     }

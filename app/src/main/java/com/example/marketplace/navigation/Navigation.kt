@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.marketplace.ui.screen.auth.AuthScreen
+import com.example.marketplace.ui.screen.auth.AuthViewModel
 import com.example.marketplace.ui.screen.main.MainScreen
 import com.example.marketplace.ui.screen.product.ProductScreen
 import com.example.marketplace.ui.screen.registration.RegistrationScreen
@@ -26,7 +27,7 @@ fun Navigation(
     activityContext: Context,
     viewModelFactory: ViewModelFactory
 ) {
-    NavHost(navController = navController, startDestination = Screen.RegistrationScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.AuthScreen.route) {
         composable(route = Screen.RegistrationScreen.route) {
             NavigationRouter.currentScreen.value = Screen.RegistrationScreen
 
@@ -41,7 +42,14 @@ fun Navigation(
 
         composable(route = Screen.AuthScreen.route) {
             NavigationRouter.currentScreen.value = Screen.AuthScreen
-            AuthScreen()
+
+            val authViewModel: AuthViewModel =
+                ViewModelProvider(it, viewModelFactory)[AuthViewModel::class]
+
+            AuthScreen(
+                onEnterButtonPressed = { navController.navigate(Screen.MainScreen.route) },
+                viewModel = authViewModel
+            )
         }
 
         composable(route = Screen.MainScreen.route) {
