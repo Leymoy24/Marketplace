@@ -22,7 +22,6 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.marketplace.R
@@ -172,7 +171,7 @@ fun RegistrationScreen(
                     if (nameTextState.isEmpty()) {
                         viewModel.nameFieldState.value = CommonUiState.Error
                     }
-                    if (emailTextState.isEmpty()) {
+                    if (emailTextState.isEmpty() || !viewModel.isEmailCorrect(emailTextState)) {
                         viewModel.emailFieldState.value = CommonUiState.Error
                     }
                     if (passwordTextState.isEmpty()) {
@@ -205,8 +204,8 @@ fun RegistrationScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun RegistrationScreenPreview() {
-    RegistrationScreen({}, RegistrationViewModel())
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun RegistrationScreenPreview() {
+//    RegistrationScreen({}, RegistrationViewModel())
+//}
