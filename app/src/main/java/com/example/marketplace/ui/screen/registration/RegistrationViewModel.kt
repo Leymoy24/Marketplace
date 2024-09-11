@@ -58,7 +58,7 @@ class RegistrationViewModel @Inject constructor(
 
             when (val response = registerUserUseCase(registerUserRequest = request)) {
                 is ApiResult.Success -> {
-                    uiScreenState.value = if (response.data!!.status == "success") {
+                    uiScreenState.value = if (response.data!!.status == STATUS_SUCCESS) {
                         RegistrationUiState.Success
                     } else {
                         RegistrationUiState.AlreadyRegisteredEmail
@@ -71,5 +71,9 @@ class RegistrationViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    private companion object {
+        const val STATUS_SUCCESS = "success"
     }
 }

@@ -67,6 +67,10 @@ class AuthViewModel @Inject constructor(
         val token = withContext(Dispatchers.IO) {
             getTokenUseCase()
         }
-        return token != "default"
+        return token != DEFAULT_STRING
+    }
+
+    private companion object {
+        const val DEFAULT_STRING = "default"
     }
 }
