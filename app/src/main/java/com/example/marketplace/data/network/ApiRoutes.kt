@@ -3,7 +3,7 @@ package com.example.marketplace.data.network
 object ApiRoutes {
 
     const val BASE_URL = "https://fakeshopapi-l2ng.onrender.com"
-    const val PRODUCTS = "/products"
+    const val PRODUCTS = "/app/v1/products"
     const val PRODUCTS_CATEGORY = "/products?category="
     const val PRODUCTS_PRICE = "/products?price="
     const val PRODUCTS_PAGINATION_FIRST = "/products?limit="

@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marketplace.data.model.request.LoginUserRequest
 import com.example.marketplace.data.network.ApiResult
-import com.example.marketplace.domain.GetTokenUseCase
-import com.example.marketplace.domain.IsEmailCorrectUseCase
-import com.example.marketplace.domain.LoginUserUseCase
-import com.example.marketplace.domain.SaveTokenUseCase
+import com.example.marketplace.domain.usecase.GetTokenUseCase
+import com.example.marketplace.domain.usecase.IsEmailCorrectUseCase
+import com.example.marketplace.domain.usecase.LoginUserUseCase
+import com.example.marketplace.domain.usecase.SaveTokenUseCase
 import com.example.marketplace.ui.screen.CommonUiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

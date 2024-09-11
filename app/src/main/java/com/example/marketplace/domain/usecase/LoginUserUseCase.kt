@@ -1,4 +1,4 @@
-package com.example.marketplace.domain
+package com.example.marketplace.domain.usecase
 
 import com.example.marketplace.data.model.request.LoginUserRequest
 import com.example.marketplace.data.model.response.LoginUserResponse

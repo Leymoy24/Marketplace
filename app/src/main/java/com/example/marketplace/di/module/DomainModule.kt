@@ -1,19 +1,22 @@
 package com.example.marketplace.di.module
 
+import com.example.marketplace.data.source.SessionStorage
 import com.example.marketplace.di.scope.AppScope
-import com.example.marketplace.domain.AuthRepository
-import com.example.marketplace.domain.GetTokenUseCase
-import com.example.marketplace.domain.GetTokenUseCaseImpl
-import com.example.marketplace.domain.IsEmailCorrectUseCase
-import com.example.marketplace.domain.IsEmailCorrectUseCaseImpl
-import com.example.marketplace.domain.LoginUserUseCase
-import com.example.marketplace.domain.LoginUserUseCaseImpl
-import com.example.marketplace.domain.RegisterUserUseCase
-import com.example.marketplace.domain.RegisterUserUseCaseImpl
-import com.example.marketplace.domain.SaveTokenUseCase
-import com.example.marketplace.domain.SaveTokenUseCaseImpl
+import com.example.marketplace.domain.repository.AuthRepository
+import com.example.marketplace.domain.repository.MainRepository
+import com.example.marketplace.domain.usecase.GetTokenUseCase
+import com.example.marketplace.domain.usecase.GetTokenUseCaseImpl
+import com.example.marketplace.domain.usecase.IsEmailCorrectUseCase
+import com.example.marketplace.domain.usecase.IsEmailCorrectUseCaseImpl
+import com.example.marketplace.domain.usecase.LoginUserUseCase
+import com.example.marketplace.domain.usecase.LoginUserUseCaseImpl
+import com.example.marketplace.domain.usecase.RegisterUserUseCase
+import com.example.marketplace.domain.usecase.RegisterUserUseCaseImpl
+import com.example.marketplace.domain.usecase.SaveTokenUseCase
+import com.example.marketplace.domain.usecase.SaveTokenUseCaseImpl
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 object DomainModule {

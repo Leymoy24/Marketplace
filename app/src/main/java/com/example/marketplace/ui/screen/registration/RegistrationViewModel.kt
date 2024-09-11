@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marketplace.data.model.request.RegisterUserRequest
 import com.example.marketplace.data.network.ApiResult
-import com.example.marketplace.domain.IsEmailCorrectUseCase
-import com.example.marketplace.domain.RegisterUserUseCase
+import com.example.marketplace.domain.usecase.IsEmailCorrectUseCase
+import com.example.marketplace.domain.usecase.RegisterUserUseCase
 import com.example.marketplace.ui.screen.CommonUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

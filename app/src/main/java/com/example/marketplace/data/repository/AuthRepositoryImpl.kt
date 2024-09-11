@@ -8,7 +8,7 @@ import com.example.marketplace.data.network.ApiResult
 import com.example.marketplace.data.network.ApiService
 import com.example.marketplace.data.source.RegexManager
 import com.example.marketplace.data.source.sharedPref.SharedPref
-import com.example.marketplace.domain.AuthRepository
+import com.example.marketplace.domain.repository.AuthRepository
 import retrofit2.Response
 
 class AuthRepositoryImpl(

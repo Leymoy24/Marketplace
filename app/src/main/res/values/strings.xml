@@ -13,4 +13,5 @@
     <string name="password_not_requirements">Пароль должен состоять минимум из 8 символов</string>
     <string name="email_already_exists">Пользователь с таким email уже существует</string>
     <string name="invalid_email_or_password">Неверный email или пароль</string>
+    <string name="chip_all">Все</string>
 </resources>
