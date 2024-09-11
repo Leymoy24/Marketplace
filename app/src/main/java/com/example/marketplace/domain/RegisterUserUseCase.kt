@@ -5,5 +5,5 @@ import com.example.marketplace.data.model.response.RegisterUserResponse
 import com.example.marketplace.data.network.ApiResult
 
 interface RegisterUserUseCase {
-    suspend fun invoke(registerUserRequest: RegisterUserRequest): ApiResult<RegisterUserResponse>
+    suspend operator fun invoke(registerUserRequest: RegisterUserRequest): ApiResult<RegisterUserResponse>
 }

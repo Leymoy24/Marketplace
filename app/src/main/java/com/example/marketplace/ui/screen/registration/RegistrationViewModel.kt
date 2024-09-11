@@ -15,6 +15,7 @@ class RegistrationViewModel @Inject constructor(
     private val isEmailCorrectUseCase: IsEmailCorrectUseCase,
     private val registerUserUseCase: RegisterUserUseCase
 ): ViewModel() {
+
     val uiScreenState = MutableStateFlow<RegistrationUiState>(RegistrationUiState.Initial)
     val nameFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
     val emailFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
@@ -55,7 +56,7 @@ class RegistrationViewModel @Inject constructor(
                 cpassword = password
             )
 
-            when (val response = registerUserUseCase.invoke(registerUserRequest = request)) {
+            when (val response = registerUserUseCase(registerUserRequest = request)) {
                 is ApiResult.Success -> {
                     uiScreenState.value = if (response.data!!.status == "success") {
                         RegistrationUiState.Success

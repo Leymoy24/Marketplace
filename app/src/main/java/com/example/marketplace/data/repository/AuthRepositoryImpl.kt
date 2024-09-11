@@ -1,6 +1,8 @@
 package com.example.marketplace.data.repository
 
+import com.example.marketplace.data.model.request.LoginUserRequest
 import com.example.marketplace.data.model.request.RegisterUserRequest
+import com.example.marketplace.data.model.response.LoginUserResponse
 import com.example.marketplace.data.model.response.RegisterUserResponse
 import com.example.marketplace.data.network.ApiResult
 import com.example.marketplace.data.network.ApiService
@@ -24,6 +26,23 @@ class AuthRepositoryImpl(
                 registerUserRequest = registerUserRequest
             )
             if (response.isSuccessful) {
+                ApiResult.Success(response.body())
+            } else {
+                ApiResult.Error(response.message())
+            }
+        } catch (e: Exception) {
+            ApiResult.Error(e.message ?: "unknown error")
+        }
+    }
+
+    override suspend fun loginUser(
+        loginUserRequest: LoginUserRequest
+    ): ApiResult<LoginUserResponse> {
+        return try {
+            val response: Response<LoginUserResponse> = apiService.loginUser(
+                loginUserRequest = loginUserRequest
+            )
+            if (response.isSuccessful && response.body()?.status == "success") {
                 ApiResult.Success(response.body())
             } else {
                 ApiResult.Error(response.message())

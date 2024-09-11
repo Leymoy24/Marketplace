@@ -7,7 +7,7 @@ import com.example.marketplace.data.network.ApiResult
 class RegisterUserUseCaseImpl(
     private val authRepository: AuthRepository
 ) : RegisterUserUseCase {
-    override suspend fun invoke(registerUserRequest: RegisterUserRequest): ApiResult<RegisterUserResponse> {
+    override suspend operator fun invoke(registerUserRequest: RegisterUserRequest): ApiResult<RegisterUserResponse> {
         return authRepository.registerUser(registerUserRequest)
     }
 }

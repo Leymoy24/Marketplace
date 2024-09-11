@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.marketplace.R
@@ -103,6 +105,38 @@ fun AuthScreen(
                 }
             )
 
+            Text(
+                text = when (uiState) {
+                    is AuthUiState.Initial,
+                    is AuthUiState.Loading,
+                    is AuthUiState.Success -> {
+                        ""
+                    }
+
+                    is AuthUiState.AuthFailed -> {
+                        stringResource(id = R.string.invalid_email_or_password)
+                    }
+
+                    is AuthUiState.EmptyFields -> {
+                        stringResource(id = R.string.fields_are_empty)
+                    }
+
+                    is AuthUiState.EmailNotCorrect -> {
+                        stringResource(id = R.string.email_not_correct)
+                    }
+
+                    else -> {
+                        "error"
+                    }
+                },
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.inversePrimary,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 70.dp)
+                    .padding(top = 15.dp)
+            )
+
             Spacer(modifier = Modifier.weight(1f))
 
             CommonButton(
@@ -122,10 +156,10 @@ fun AuthScreen(
                         return@CommonButton
                     }
 
-//                    viewModel.auth(
-//                        email = emailTextState,
-//                        password = passwordTextState,
-//                    )
+                    viewModel.login(
+                        email = emailTextState,
+                        password = passwordTextState,
+                    )
                 },
                 modifier = Modifier.padding(bottom = 60.dp),
                 color = Blue

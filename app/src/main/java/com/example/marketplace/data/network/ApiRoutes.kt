@@ -12,7 +12,7 @@ object ApiRoutes {
     const val PRODUCTS_SORT = "/products?sort="
 
     const val USERS = "/users"
-    const val USERS_AUTH_LOGIN = "/users/auth/login"
+    const val USERS_AUTH_LOGIN = "/app/v1/users/auth/login"
     const val USER_REGISTER = "/app/v1/users"
 
     const val CARTS = "/carts"
