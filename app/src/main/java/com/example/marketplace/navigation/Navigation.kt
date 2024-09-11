@@ -27,7 +27,7 @@ fun Navigation(
     activityContext: Context,
     viewModelFactory: ViewModelFactory
 ) {
-    NavHost(navController = navController, startDestination = Screen.AuthScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.RegistrationScreen.route) {
         composable(route = Screen.RegistrationScreen.route) {
             NavigationRouter.currentScreen.value = Screen.RegistrationScreen
 

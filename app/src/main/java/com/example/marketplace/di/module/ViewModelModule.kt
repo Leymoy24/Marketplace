@@ -3,6 +3,7 @@ package com.example.marketplace.di.module
 import com.example.marketplace.di.scope.ActivityScope
 import com.example.marketplace.domain.IsEmailCorrectUseCase
 import com.example.marketplace.domain.IsEmailCorrectUseCaseImpl
+import com.example.marketplace.domain.RegisterUserUseCase
 import com.example.marketplace.util.ViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -12,8 +13,10 @@ object ViewModelModule {
     @Provides
     @ActivityScope
     fun provideViewModelFactory(
-        isEmailCorrectUseCase: IsEmailCorrectUseCase
+        isEmailCorrectUseCase: IsEmailCorrectUseCase,
+        registerUserUseCase: RegisterUserUseCase
     ): ViewModelFactory = ViewModelFactory(
-        isEmailCorrectUseCase = isEmailCorrectUseCase
+        isEmailCorrectUseCase = isEmailCorrectUseCase,
+        registerUserUseCase = registerUserUseCase
     )
 }

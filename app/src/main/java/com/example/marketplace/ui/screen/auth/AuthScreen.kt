@@ -109,7 +109,7 @@ fun AuthScreen(
                 text = stringResource(R.string.enter),
                 isLoading = uiState is AuthUiState.Loading,
                 onClick = {
-                    if (emailTextState.isEmpty() || !viewModel.isEmailCorrect(emailTextState)) {
+                    if (emailTextState.isEmpty()) {
                         viewModel.emailFieldState.value = CommonUiState.Error
                     }
                     if (passwordTextState.isEmpty()) {

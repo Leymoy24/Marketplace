@@ -1,10 +1,12 @@
 package com.example.marketplace.ui.screen.registration
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +24,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.marketplace.R
@@ -161,6 +164,47 @@ fun RegistrationScreen(
                 }
             )
 
+            when (uiState) {
+                is RegistrationUiState.EmailNotCorrect,
+                is RegistrationUiState.PasswordNotCorrect,
+                is RegistrationUiState.PasswordsNotEquals,
+                is RegistrationUiState.EmptyFields,
+                is RegistrationUiState.AlreadyRegisteredEmail-> {
+                    val errorText = when (uiState) {
+                        is RegistrationUiState.EmailNotCorrect -> {
+                            stringResource(id = R.string.email_not_correct)
+                        }
+
+                        is RegistrationUiState.PasswordNotCorrect -> {
+                            stringResource(id = R.string.password_not_requirements)
+                        }
+
+                        is RegistrationUiState.PasswordsNotEquals -> {
+                            stringResource(id = R.string.mismatch_password)
+                        }
+
+                        is RegistrationUiState.AlreadyRegisteredEmail -> {
+                            stringResource(R.string.email_already_exists)
+                        }
+
+                        else -> {
+                            stringResource(id = R.string.fields_are_empty)
+                        }
+                    }
+
+                    Text(
+                        text = errorText,
+                        color = MaterialTheme.colorScheme.inversePrimary,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 70.dp)
+                            .padding(top = 15.dp)
+                    )
+                }
+                else -> {}
+            }
+
             Spacer(modifier = Modifier.weight(1f))
 
             CommonButton(
@@ -170,7 +214,7 @@ fun RegistrationScreen(
                     if (nameTextState.isEmpty()) {
                         viewModel.nameFieldState.value = CommonUiState.Error
                     }
-                    if (emailTextState.isEmpty() || !viewModel.isEmailCorrect(emailTextState)) {
+                    if (emailTextState.isEmpty()) {
                         viewModel.emailFieldState.value = CommonUiState.Error
                     }
                     if (passwordTextState.isEmpty()) {
@@ -189,11 +233,11 @@ fun RegistrationScreen(
                         return@CommonButton
                     }
 
-//                    viewModel.register(
-//                        nickname = nameTextState,
-//                        email = emailTextState,
-//                        password = passwordTextState,
-//                    )
+                    viewModel.register(
+                        name = nameTextState,
+                        email = emailTextState,
+                        password = passwordTextState,
+                    )
                 },
                 modifier = Modifier.padding(bottom = 60.dp),
                 color = Blue

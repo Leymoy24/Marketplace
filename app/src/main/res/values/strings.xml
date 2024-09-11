@@ -7,4 +7,9 @@
     <string name="password">Пароль</string>
     <string name="confirm_the_password">Подтвердите пароль</string>
     <string name="enter">Войти</string>
+    <string name="fields_are_empty">Не все поля заполнены</string>
+    <string name="email_not_correct">Email некорректен</string>
+    <string name="mismatch_password">Пароли не совпадают</string>
+    <string name="password_not_requirements">Пароль должен состоять минимум из 8 символов</string>
+    <string name="email_already_exists">Пользователь с таким email уже существует</string>
 </resources>
