@@ -10,4 +10,6 @@ interface AuthRepository {
     fun isEmailCorrect(email: String): Boolean
     suspend fun registerUser(registerUserRequest: RegisterUserRequest): ApiResult<RegisterUserResponse>
     suspend fun loginUser(loginUserRequest: LoginUserRequest): ApiResult<LoginUserResponse>
+    fun getToken(): String
+    fun saveToken(token: String)
 }

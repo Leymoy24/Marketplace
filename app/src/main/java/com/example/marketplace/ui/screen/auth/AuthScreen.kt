@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,8 +47,10 @@ fun AuthScreen(
     var passwordTextState by rememberSaveable { mutableStateOf("") }
     var isVisiblePassword by rememberSaveable { mutableStateOf(false) }
 
-    if (uiState is AuthUiState.Success) {
-        onEnterButtonPressed()
+    LaunchedEffect(uiState) {
+        if (uiState is AuthUiState.Success) {
+            onEnterButtonPressed()
+        }
     }
 
     Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {

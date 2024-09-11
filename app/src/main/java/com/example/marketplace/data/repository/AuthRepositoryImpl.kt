@@ -7,11 +7,13 @@ import com.example.marketplace.data.model.response.RegisterUserResponse
 import com.example.marketplace.data.network.ApiResult
 import com.example.marketplace.data.network.ApiService
 import com.example.marketplace.data.source.RegexManager
+import com.example.marketplace.data.source.sharedPref.SharedPref
 import com.example.marketplace.domain.AuthRepository
 import retrofit2.Response
 
 class AuthRepositoryImpl(
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val sharedPref: SharedPref
 ) : AuthRepository {
 
     override fun isEmailCorrect(email: String): Boolean {
@@ -50,6 +52,14 @@ class AuthRepositoryImpl(
         } catch (e: Exception) {
             ApiResult.Error(e.message ?: "unknown error")
         }
+    }
+
+    override fun getToken(): String {
+        return sharedPref.getToken()
+    }
+
+    override fun saveToken(token: String) {
+        sharedPref.saveToken(token)
     }
 
 }

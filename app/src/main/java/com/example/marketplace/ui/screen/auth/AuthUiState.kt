@@ -8,5 +8,4 @@ sealed interface AuthUiState {
     data object AuthFailed : AuthUiState
     data object EmptyFields : AuthUiState
     data object EmailNotCorrect : AuthUiState
-    data object PasswordError : AuthUiState
 }

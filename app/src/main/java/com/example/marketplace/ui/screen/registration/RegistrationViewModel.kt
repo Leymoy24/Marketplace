@@ -23,7 +23,7 @@ class RegistrationViewModel @Inject constructor(
     val repeatPasswordFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
 
     private fun isEmailCorrect(email: String): Boolean {
-        return isEmailCorrectUseCase.invoke(email)
+        return isEmailCorrectUseCase(email)
     }
 
     private fun isPasswordCorrect(password: String): Boolean {

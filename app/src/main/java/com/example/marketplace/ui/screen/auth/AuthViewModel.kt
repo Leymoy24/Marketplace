@@ -4,16 +4,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.marketplace.data.model.request.LoginUserRequest
 import com.example.marketplace.data.network.ApiResult
+import com.example.marketplace.domain.GetTokenUseCase
 import com.example.marketplace.domain.IsEmailCorrectUseCase
 import com.example.marketplace.domain.LoginUserUseCase
+import com.example.marketplace.domain.SaveTokenUseCase
 import com.example.marketplace.ui.screen.CommonUiState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class AuthViewModel @Inject constructor(
     private val isEmailCorrectUseCase: IsEmailCorrectUseCase,
-    private val loginUserUseCase: LoginUserUseCase
+    private val loginUserUseCase: LoginUserUseCase,
+    private val getTokenUseCase: GetTokenUseCase,
+    private val saveTokenUseCase: SaveTokenUseCase
 ) : ViewModel() {
 
     val uiScreenState = MutableStateFlow<AuthUiState>(AuthUiState.Initial)
@@ -21,7 +27,7 @@ class AuthViewModel @Inject constructor(
     val passwordFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
 
     private fun isEmailCorrect(email: String): Boolean {
-        return isEmailCorrectUseCase.invoke(email)
+        return isEmailCorrectUseCase(email)
     }
 
     fun login(email: String, password: String) {
@@ -43,6 +49,7 @@ class AuthViewModel @Inject constructor(
 
             when (val response = loginUserUseCase(loginUserRequest = request)) {
                 is ApiResult.Success -> {
+                    saveTokenUseCase(response.data!!.token)
                     uiScreenState.value = AuthUiState.Success
                 }
 
@@ -53,5 +60,13 @@ class AuthViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    suspend fun isTokenValid(): Boolean {
+        uiScreenState.value = AuthUiState.Loading
+        val token = withContext(Dispatchers.IO) {
+            getTokenUseCase()
+        }
+        return token != "default"
     }
 }

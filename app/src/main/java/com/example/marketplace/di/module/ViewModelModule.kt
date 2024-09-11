@@ -1,10 +1,12 @@
 package com.example.marketplace.di.module
 
 import com.example.marketplace.di.scope.ActivityScope
+import com.example.marketplace.domain.GetTokenUseCase
 import com.example.marketplace.domain.IsEmailCorrectUseCase
 import com.example.marketplace.domain.IsEmailCorrectUseCaseImpl
 import com.example.marketplace.domain.LoginUserUseCase
 import com.example.marketplace.domain.RegisterUserUseCase
+import com.example.marketplace.domain.SaveTokenUseCase
 import com.example.marketplace.util.ViewModelFactory
 import dagger.Module
 import dagger.Provides
@@ -16,10 +18,14 @@ object ViewModelModule {
     fun provideViewModelFactory(
         isEmailCorrectUseCase: IsEmailCorrectUseCase,
         registerUserUseCase: RegisterUserUseCase,
-        loginUserUseCase: LoginUserUseCase
+        loginUserUseCase: LoginUserUseCase,
+        getTokenUseCase: GetTokenUseCase,
+        saveTokenUseCase: SaveTokenUseCase
     ): ViewModelFactory = ViewModelFactory(
         isEmailCorrectUseCase = isEmailCorrectUseCase,
         registerUserUseCase = registerUserUseCase,
-        loginUserUseCase = loginUserUseCase
+        loginUserUseCase = loginUserUseCase,
+        getTokenUseCase = getTokenUseCase,
+        saveTokenUseCase = saveTokenUseCase
     )
 }
