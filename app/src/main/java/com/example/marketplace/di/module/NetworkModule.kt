@@ -1,8 +1,10 @@
 package com.example.marketplace.di.module
 
+import android.content.Context
 import com.example.marketplace.data.network.ApiRoutes
 import com.example.marketplace.data.network.ApiService
 import com.example.marketplace.data.network.ApiServiceImpl
+import com.example.marketplace.data.source.sharedPref.SharedPref
 import com.example.marketplace.di.scope.AppScope
 import dagger.Module
 import dagger.Provides
@@ -24,9 +26,23 @@ object NetworkModule {
 
     @Provides
     @AppScope
-    fun provideOkHttpClient(logger: HttpLoggingInterceptor): OkHttpClient {
+    fun provideOkHttpClient(logger: HttpLoggingInterceptor, sharedPref: SharedPref): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(logger)
+            .addInterceptor { chain ->
+                val originalRequest = chain.request()
+                val token = sharedPref.getToken()
+
+                val newRequest = if (token.isNotEmpty()) {
+                    originalRequest.newBuilder()
+                        .addHeader("Authorization", "Bearer $token") // Добавляем токен в заголовок
+                        .build()
+                } else {
+                    originalRequest
+                }
+
+                chain.proceed(newRequest)
+            }
             .addInterceptor { chain ->
                 try {
                     chain.proceed(chain.request())

@@ -20,7 +20,7 @@ interface ApiServiceImpl : ApiService {
 
     @POST(ApiRoutes.USERS_AUTH_LOGIN)
     override suspend fun loginUser(
-        @Body loginUserRequest: LoginUserRequest
+        @Body loginUserRequest: LoginUserRequest,
     ): Response<LoginUserResponse>
 
     @GET(ApiRoutes.PRODUCTS)
