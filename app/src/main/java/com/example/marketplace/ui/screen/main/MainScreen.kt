@@ -161,7 +161,7 @@ fun MainScreen(
                     viewModel.getMoreProducts(category = currentCategory)
                 },
                 onProductClicked = { product: ProductUiModel ->
-//                    viewModel.setCurrentProduct(product)
+                    viewModel.setCurrentProduct(product)
                     onNavProductScreen()
                 }
             )

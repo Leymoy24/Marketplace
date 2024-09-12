@@ -1,5 +1,6 @@
 package com.example.marketplace.data.repository
 
+import com.example.marketplace.data.model.ProductUiModel
 import com.example.marketplace.data.model.response.GetProductResponse
 import com.example.marketplace.data.network.ApiResult
 import com.example.marketplace.data.network.ApiService
@@ -41,6 +42,10 @@ class MainRepositoryImpl(
         } catch (e: Exception) {
             ApiResult.Error(e.message ?: "unknown error")
         }
+    }
+
+    override fun setCurrentProduct(product: ProductUiModel) {
+        sessionStorage.currentProduct = product
     }
 
 }

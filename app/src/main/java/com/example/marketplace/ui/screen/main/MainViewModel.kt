@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.marketplace.data.model.ProductUiModel
 import com.example.marketplace.data.network.ApiResult
 import com.example.marketplace.domain.repository.MainRepository
+import com.example.marketplace.util.Constants
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -126,10 +127,10 @@ class MainViewModel @Inject constructor(
             }
         }
     }
-//
-//    fun setCurrentProduct(newProduct: ProductUiModel) {
-//        repository.setCurrentProduct(newProduct)
-//    }
+
+    fun setCurrentProduct(newProduct: ProductUiModel) {
+        repository.setCurrentProduct(newProduct)
+    }
 
     fun clearListOfSearchedProducts() {
         _listOfSearchedProducts.value = null
