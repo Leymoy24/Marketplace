@@ -1,6 +1,5 @@
 package com.example.marketplace.ui.screen.main.components
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,10 +37,10 @@ fun ProductItem(
             .fillMaxSize()
             .padding(horizontal = 10.dp)
             .clip(RoundedCornerShape(30.dp))
-            .background(MaterialTheme.colorScheme.background)
             .clickable {
                 onClick()
-            }
+            },
+        color = MaterialTheme.colorScheme.background
     ) {
         Column() {
             Box(

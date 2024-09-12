@@ -65,7 +65,7 @@ fun RegistrationScreen(
                 .padding(horizontal = 26.dp)
         ) {
             Text(
-                modifier = Modifier.padding(top = 48.dp, bottom = 70.dp),
+                modifier = Modifier.padding(top = 80.dp, bottom = 70.dp),
                 text = stringResource(R.string.registration),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 24.sp,
@@ -241,7 +241,7 @@ fun RegistrationScreen(
                         password = passwordTextState,
                     )
                 },
-                modifier = Modifier.padding(bottom = 60.dp),
+                modifier = Modifier.padding(bottom = 80.dp),
                 color = Blue
             )
 

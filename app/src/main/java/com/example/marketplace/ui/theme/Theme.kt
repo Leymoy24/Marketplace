@@ -50,6 +50,7 @@ fun MarketplaceTheme(
         else -> LightColorScheme
     }
 
+
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,

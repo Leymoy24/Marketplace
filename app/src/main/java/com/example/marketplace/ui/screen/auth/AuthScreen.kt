@@ -61,7 +61,7 @@ fun AuthScreen(
                 .padding(horizontal = 26.dp)
         ) {
             Text(
-                modifier = Modifier.padding(top = 48.dp, bottom = 70.dp),
+                modifier = Modifier.padding(top = 80.dp, bottom = 70.dp),
                 text = stringResource(R.string.enter),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 24.sp,
@@ -165,7 +165,7 @@ fun AuthScreen(
                         password = passwordTextState,
                     )
                 },
-                modifier = Modifier.padding(bottom = 60.dp),
+                modifier = Modifier.padding(bottom = 80.dp),
                 color = Blue
             )
         }

@@ -72,7 +72,7 @@ fun CategoryChip(
                 color = if (isSelected) {
                     MaterialTheme.colorScheme.primaryContainer
                 } else {
-                    MaterialTheme.colorScheme.surface
+                    MaterialTheme.colorScheme.background
                 }
             )
             .height(50.dp)
