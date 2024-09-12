@@ -80,8 +80,8 @@ class MainViewModel @Inject constructor(
             _uiScreenState.value = MainUiState.Loading
 
             when (val result = repository.getProducts(
-//                skip = currentPage * Constants.LIMIT_PRODUCTS,
-//                category = category
+                limit = Constants.LIMIT_PRODUCTS,
+                page = currentPage
             )) {
                 is ApiResult.Success -> {
                     _uiScreenState.value = MainUiState.Success(result.data)

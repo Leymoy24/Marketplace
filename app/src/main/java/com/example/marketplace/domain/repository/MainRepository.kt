@@ -6,6 +6,7 @@ import com.example.marketplace.data.network.ApiResult
 
 interface MainRepository {
     suspend fun getProducts(): ApiResult<GetProductResponse>
+    suspend fun getProducts(limit: Int, page: Int): ApiResult<GetProductResponse>
     fun getCategories(): List<String>
     suspend fun getProductsByCategory(category: String): ApiResult<GetProductResponse>
     fun setCurrentProduct(product: ProductUiModel)

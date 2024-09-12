@@ -11,5 +11,6 @@ interface ApiService {
     suspend fun registerUser(registerUserRequest: RegisterUserRequest): Response<RegisterUserResponse>
     suspend fun loginUser(loginUserRequest: LoginUserRequest): Response<LoginUserResponse>
     suspend fun getProducts(): Response<GetProductResponse>
+    suspend fun getProducts(limit: Int, page: Int): Response<GetProductResponse>
     suspend fun getProductsByCategory(category: String): Response<GetProductResponse>
 }

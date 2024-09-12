@@ -31,4 +31,10 @@ interface ApiServiceImpl : ApiService {
         @Query("category") category: String
     ): Response<GetProductResponse>
 
+    @GET(ApiRoutes.PRODUCTS)
+    override suspend fun getProducts(
+        @Query("limit") limit: Int,
+        @Query("page") page: Int
+    ): Response<GetProductResponse>
+
 }

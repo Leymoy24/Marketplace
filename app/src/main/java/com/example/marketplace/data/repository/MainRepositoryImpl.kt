@@ -27,6 +27,19 @@ class MainRepositoryImpl(
         }
     }
 
+    override suspend fun getProducts(limit: Int, page: Int): ApiResult<GetProductResponse> {
+        return try {
+            val response = apiService.getProducts(limit, page)
+            if (response.isSuccessful) {
+                ApiResult.Success(response.body())
+            } else {
+                ApiResult.Error(response.message())
+            }
+        } catch (e: Exception) {
+            ApiResult.Error(e.message ?: "unknown error")
+        }
+    }
+
     override fun getCategories(): List<String> {
         return sessionStorage.listOfCategories
     }
