@@ -48,4 +48,8 @@ class MainRepositoryImpl(
         sessionStorage.currentProduct = product
     }
 
+    override fun getCurrentProduct(): ProductUiModel? {
+        return sessionStorage.currentProduct
+    }
+
 }

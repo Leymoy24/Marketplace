@@ -14,6 +14,7 @@ import com.example.marketplace.ui.screen.loader.LoaderScreen
 import com.example.marketplace.ui.screen.main.MainScreen
 import com.example.marketplace.ui.screen.main.MainViewModel
 import com.example.marketplace.ui.screen.product.ProductScreen
+import com.example.marketplace.ui.screen.product.ProductViewModel
 import com.example.marketplace.ui.screen.registration.RegistrationScreen
 import com.example.marketplace.ui.screen.registration.RegistrationViewModel
 import com.example.marketplace.util.ViewModelFactory
@@ -81,7 +82,14 @@ fun Navigation(
 
         composable(route = Screen.ProductScreen.route) {
             NavigationRouter.currentScreen.value = Screen.ProductScreen
-            ProductScreen()
+
+            val productViewModel: ProductViewModel =
+                ViewModelProvider(it, viewModelFactory)[ProductViewModel::class]
+
+            ProductScreen(
+                navController = navController,
+                viewModel = productViewModel
+            )
         }
     }
 }

@@ -10,6 +10,7 @@ import com.example.marketplace.domain.usecase.RegisterUserUseCase
 import com.example.marketplace.domain.usecase.SaveTokenUseCase
 import com.example.marketplace.ui.screen.auth.AuthViewModel
 import com.example.marketplace.ui.screen.main.MainViewModel
+import com.example.marketplace.ui.screen.product.ProductViewModel
 import com.example.marketplace.ui.screen.registration.RegistrationViewModel
 
 @Suppress("UNCHECKED_CAST")
@@ -42,6 +43,10 @@ class ViewModelFactory(
 
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 MainViewModel(repository = mainRepository) as T
+            }
+
+            modelClass.isAssignableFrom(ProductViewModel::class.java) -> {
+                ProductViewModel(repository = mainRepository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

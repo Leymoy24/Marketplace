@@ -9,4 +9,5 @@ interface MainRepository {
     fun getCategories(): List<String>
     suspend fun getProductsByCategory(category: String): ApiResult<GetProductResponse>
     fun setCurrentProduct(product: ProductUiModel)
+    fun getCurrentProduct(): ProductUiModel?
 }

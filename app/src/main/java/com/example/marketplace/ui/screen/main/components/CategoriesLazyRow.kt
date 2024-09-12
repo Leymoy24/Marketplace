@@ -67,7 +67,7 @@ fun CategoryChip(
     Box(
         modifier = modifier
             .padding(horizontal = 5.dp)
-            .clip(RoundedCornerShape(30.dp))
+            .clip(RoundedCornerShape(20.dp))
             .background(
                 color = if (isSelected) {
                     MaterialTheme.colorScheme.primaryContainer

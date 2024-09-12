@@ -51,14 +51,19 @@ fun ProductItem(
                     .clip(RoundedCornerShape(30.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                SubcomposeAsyncImage(
-                    model = productUiModel.images[0],
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    loading = {
-                        CircularProgressIndicator()
-                    }
-                )
+                if (productUiModel.images.isEmpty()) {
+                    Text(text = "Нет изображения")
+                } else {
+                    SubcomposeAsyncImage(
+                        model = productUiModel.images[0],
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        loading = {
+                            CircularProgressIndicator()
+                        }
+                    )
+                }
+
             }
             Column(
                 modifier = Modifier
