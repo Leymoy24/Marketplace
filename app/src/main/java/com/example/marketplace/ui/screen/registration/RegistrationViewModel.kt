@@ -8,6 +8,7 @@ import com.example.marketplace.domain.usecase.IsEmailCorrectUseCase
 import com.example.marketplace.domain.usecase.RegisterUserUseCase
 import com.example.marketplace.ui.screen.CommonUiState
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,11 +17,40 @@ class RegistrationViewModel @Inject constructor(
     private val registerUserUseCase: RegisterUserUseCase
 ): ViewModel() {
 
-    val uiScreenState = MutableStateFlow<RegistrationUiState>(RegistrationUiState.Initial)
-    val nameFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
-    val emailFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
-    val passwordFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
-    val repeatPasswordFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
+    private val _uiScreenState = MutableStateFlow<RegistrationUiState>(RegistrationUiState.Initial)
+    val uiScreenState: StateFlow<RegistrationUiState> = _uiScreenState
+
+    private val _nameFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
+    val nameFieldState: StateFlow<CommonUiState> = _nameFieldState
+
+    private val _emailFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
+    val emailFieldState: StateFlow<CommonUiState> = _emailFieldState
+
+    private val _passwordFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
+    val passwordFieldState: StateFlow<CommonUiState> = _passwordFieldState
+
+    private val _repeatPasswordFieldState = MutableStateFlow<CommonUiState>(CommonUiState.Initial)
+    val repeatPasswordFieldState: StateFlow<CommonUiState> = _repeatPasswordFieldState
+
+    fun changeUiScreenState(newState: RegistrationUiState) {
+        _uiScreenState.value = newState
+    }
+
+    fun changeNameFieldState(newState: CommonUiState) {
+        _nameFieldState.value = newState
+    }
+
+    fun changeEmailFieldState(newState: CommonUiState) {
+        _emailFieldState.value = newState
+    }
+
+    fun changePasswordFieldState(newState: CommonUiState) {
+        _passwordFieldState.value = newState
+    }
+
+    fun changeRepeatPasswordFieldState(newState: CommonUiState) {
+        _repeatPasswordFieldState.value = newState
+    }
 
     private fun isEmailCorrect(email: String): Boolean {
         return isEmailCorrectUseCase(email)
@@ -34,20 +64,20 @@ class RegistrationViewModel @Inject constructor(
         if (uiScreenState.value is RegistrationUiState.PasswordsNotEquals) return
 
         if (!isEmailCorrect(email)) {
-            emailFieldState.value = CommonUiState.Error
-            uiScreenState.value = RegistrationUiState.EmailNotCorrect
+            _emailFieldState.value = CommonUiState.Error
+            _uiScreenState.value = RegistrationUiState.EmailNotCorrect
             return
         }
 
         if (!isPasswordCorrect(password)) {
-            passwordFieldState.value = CommonUiState.Error
-            repeatPasswordFieldState.value = CommonUiState.Error
-            uiScreenState.value = RegistrationUiState.PasswordNotCorrect
+            _passwordFieldState.value = CommonUiState.Error
+            _repeatPasswordFieldState.value = CommonUiState.Error
+            _uiScreenState.value = RegistrationUiState.PasswordNotCorrect
             return
         }
 
         viewModelScope.launch {
-            uiScreenState.value = RegistrationUiState.Loading
+            _uiScreenState.value = RegistrationUiState.Loading
 
             val request = RegisterUserRequest(
                 name = name,
@@ -58,7 +88,7 @@ class RegistrationViewModel @Inject constructor(
 
             when (val response = registerUserUseCase(registerUserRequest = request)) {
                 is ApiResult.Success -> {
-                    uiScreenState.value = if (response.data!!.status == STATUS_SUCCESS) {
+                    _uiScreenState.value = if (response.data!!.status == STATUS_SUCCESS) {
                         RegistrationUiState.Success
                     } else {
                         RegistrationUiState.AlreadyRegisteredEmail
@@ -66,8 +96,8 @@ class RegistrationViewModel @Inject constructor(
                 }
 
                 is ApiResult.Error -> {
-                    uiScreenState.value = RegistrationUiState.AlreadyRegisteredEmail
-                    emailFieldState.value = CommonUiState.Error
+                    _uiScreenState.value = RegistrationUiState.AlreadyRegisteredEmail
+                    _emailFieldState.value = CommonUiState.Error
                 }
             }
         }

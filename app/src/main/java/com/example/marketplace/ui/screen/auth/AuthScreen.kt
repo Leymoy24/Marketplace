@@ -32,6 +32,7 @@ import com.example.marketplace.ui.composables.CommonButton
 import com.example.marketplace.ui.composables.CommonOutlinedTextField
 import com.example.marketplace.ui.composables.EyeIconButton
 import com.example.marketplace.ui.screen.CommonUiState
+import com.example.marketplace.ui.screen.registration.RegistrationUiState
 import com.example.marketplace.ui.theme.Blue
 
 @Composable
@@ -71,8 +72,8 @@ fun AuthScreen(
                 value = emailTextState,
                 onValueChange = { value: String ->
                     emailTextState = value
-                    viewModel.uiScreenState.value = AuthUiState.Initial
-                    viewModel.emailFieldState.value = CommonUiState.Initial
+                    viewModel.changeUiScreenState(AuthUiState.Initial)
+                    viewModel.changeEmailFieldState(CommonUiState.Initial)
                 },
                 textPlaceholder = stringResource(id = R.string.email),
                 keyboardOptions = KeyboardOptions(
@@ -87,8 +88,8 @@ fun AuthScreen(
                 value = passwordTextState,
                 onValueChange = { value: String ->
                     passwordTextState = value
-                    viewModel.uiScreenState.value = AuthUiState.Initial
-                    viewModel.passwordFieldState.value = CommonUiState.Initial
+                    viewModel.changeUiScreenState(AuthUiState.Initial)
+                    viewModel.changePasswordFieldState(CommonUiState.Initial)
                 },
                 modifier = Modifier
                     .padding(top = 22.dp),
@@ -147,15 +148,15 @@ fun AuthScreen(
                 isLoading = uiState is AuthUiState.Loading,
                 onClick = {
                     if (emailTextState.isEmpty()) {
-                        viewModel.emailFieldState.value = CommonUiState.Error
+                        viewModel.changeEmailFieldState(CommonUiState.Error)
                     }
                     if (passwordTextState.isEmpty()) {
-                        viewModel.passwordFieldState.value = CommonUiState.Error
+                        viewModel.changePasswordFieldState(CommonUiState.Error)
                     }
                     if (emailTextState.isEmpty()
                         || passwordTextState.isEmpty()
                     ) {
-                        viewModel.uiScreenState.value = AuthUiState.EmptyFields
+                        viewModel.changeUiScreenState(AuthUiState.EmptyFields)
                         return@CommonButton
                     }
 

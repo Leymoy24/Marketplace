@@ -76,8 +76,8 @@ fun RegistrationScreen(
                 value = nameTextState,
                 onValueChange = { value: String ->
                     nameTextState = value
-                    viewModel.uiScreenState.value = RegistrationUiState.Initial
-                    viewModel.nameFieldState.value = CommonUiState.Initial
+                    viewModel.changeUiScreenState(RegistrationUiState.Initial)
+                    viewModel.changeNameFieldState(CommonUiState.Initial)
                 },
                 textPlaceholder = stringResource(id = R.string.name),
                 keyboardOptions = KeyboardOptions(
@@ -92,8 +92,8 @@ fun RegistrationScreen(
                 value = emailTextState,
                 onValueChange = { value: String ->
                     emailTextState = value
-                    viewModel.uiScreenState.value = RegistrationUiState.Initial
-                    viewModel.emailFieldState.value = CommonUiState.Initial
+                    viewModel.changeUiScreenState(RegistrationUiState.Initial)
+                    viewModel.changeEmailFieldState(CommonUiState.Initial)
                 },
                 modifier = Modifier
                     .padding(top = 22.dp),
@@ -107,13 +107,13 @@ fun RegistrationScreen(
                 onValueChange = { value: String ->
                     passwordTextState = value
                     if (passwordTextState != repeatPasswordTextState) {
-                        viewModel.passwordFieldState.value = CommonUiState.Error
-                        viewModel.repeatPasswordFieldState.value = CommonUiState.Error
-                        viewModel.uiScreenState.value = RegistrationUiState.PasswordsNotEquals
+                        viewModel.changePasswordFieldState(CommonUiState.Error)
+                        viewModel.changeRepeatPasswordFieldState(CommonUiState.Error)
+                        viewModel.changeUiScreenState(RegistrationUiState.PasswordsNotEquals)
                     } else {
-                        viewModel.passwordFieldState.value = CommonUiState.Initial
-                        viewModel.repeatPasswordFieldState.value = CommonUiState.Initial
-                        viewModel.uiScreenState.value = RegistrationUiState.Initial
+                        viewModel.changePasswordFieldState(CommonUiState.Initial)
+                        viewModel.changeRepeatPasswordFieldState(CommonUiState.Initial)
+                        viewModel.changeUiScreenState(RegistrationUiState.Initial)
                     }
                 },
                 modifier = Modifier
@@ -139,13 +139,13 @@ fun RegistrationScreen(
                 onValueChange = { value: String ->
                     repeatPasswordTextState = value
                     if (passwordTextState != repeatPasswordTextState) {
-                        viewModel.passwordFieldState.value = CommonUiState.Error
-                        viewModel.repeatPasswordFieldState.value = CommonUiState.Error
-                        viewModel.uiScreenState.value = RegistrationUiState.PasswordsNotEquals
+                        viewModel.changePasswordFieldState(CommonUiState.Error)
+                        viewModel.changeRepeatPasswordFieldState(CommonUiState.Error)
+                        viewModel.changeUiScreenState(RegistrationUiState.PasswordsNotEquals)
                     } else {
-                        viewModel.passwordFieldState.value = CommonUiState.Initial
-                        viewModel.repeatPasswordFieldState.value = CommonUiState.Initial
-                        viewModel.uiScreenState.value = RegistrationUiState.Initial
+                        viewModel.changePasswordFieldState(CommonUiState.Initial)
+                        viewModel.changeRepeatPasswordFieldState(CommonUiState.Initial)
+                        viewModel.changeUiScreenState(RegistrationUiState.Initial)
                     }
                 },
                 modifier = Modifier
@@ -214,16 +214,16 @@ fun RegistrationScreen(
                 isLoading = uiState is RegistrationUiState.Loading,
                 onClick = {
                     if (nameTextState.isEmpty()) {
-                        viewModel.nameFieldState.value = CommonUiState.Error
+                        viewModel.changeNameFieldState(CommonUiState.Error)
                     }
                     if (emailTextState.isEmpty()) {
-                        viewModel.emailFieldState.value = CommonUiState.Error
+                        viewModel.changeEmailFieldState(CommonUiState.Error)
                     }
                     if (passwordTextState.isEmpty()) {
-                        viewModel.passwordFieldState.value = CommonUiState.Error
+                        viewModel.changePasswordFieldState(CommonUiState.Error)
                     }
                     if (repeatPasswordTextState.isEmpty()) {
-                        viewModel.repeatPasswordFieldState.value = CommonUiState.Error
+                        viewModel.changeRepeatPasswordFieldState(CommonUiState.Error)
                     }
 
                     if (nameTextState.isEmpty()
@@ -231,7 +231,7 @@ fun RegistrationScreen(
                         || passwordTextState.isEmpty()
                         || repeatPasswordTextState.isEmpty()
                     ) {
-                        viewModel.uiScreenState.value = RegistrationUiState.EmptyFields
+                        viewModel.changeUiScreenState(RegistrationUiState.EmptyFields)
                         return@CommonButton
                     }
 
